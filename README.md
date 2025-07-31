@@ -46,4 +46,9 @@ php bin/console tailwind:build -w
 Use Ctrl + C to stop the watcher
 
 
+# Stimulus
+
+composer require symfony/stimulus-bundle
+
+
 

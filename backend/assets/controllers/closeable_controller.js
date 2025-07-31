@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 
+// Should be add after stimulus
 export default class extends Controller {
     async close() {
         this.element.style.width = '0';
