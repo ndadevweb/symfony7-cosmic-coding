@@ -52,3 +52,8 @@ composer require symfony/stimulus-bundle
 
 
 
+# Turbo
+
+composer require symfony/ux-turbo
+
+
