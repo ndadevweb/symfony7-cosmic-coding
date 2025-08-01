@@ -89,3 +89,18 @@ bin/console debug:autowiring http
 Install the HTTP Client Component
 
 composer require symfony/http-client
+
+
+
+# Cache
+
+> See the cache pools
+
+bin/console cache:pool:list
+
+> Clear cache
+
+bin/console cache:pool:clear cache.app
+
+
+
