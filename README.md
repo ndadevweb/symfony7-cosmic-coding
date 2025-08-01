@@ -79,3 +79,13 @@ php bin/console debug:autowiring time
 
 php bin/console debug:twig
 
+
+Check if the application has a HTTP client
+
+bin/console debug:autowiring http
+
+
+
+Install the HTTP Client Component
+
+composer require symfony/http-client
