@@ -57,3 +57,25 @@ composer require symfony/stimulus-bundle
 composer require symfony/ux-turbo
 
 
+
+# KnpTimeBundle
+
+This bundle allows to handle dates
+
+composer require knplabs/knp-time-bundle
+
+
+Select a service to display its information
+
+bin/console debug:container time
+
+> choose Knp\Bundle\TimeBundle\DateTimeFormatter
+
+then
+
+php bin/console debug:autowiring time
+
+> To see the functions list and filters list
+
+php bin/console debug:twig
+
