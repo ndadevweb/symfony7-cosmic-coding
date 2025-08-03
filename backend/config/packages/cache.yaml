@@ -3,7 +3,7 @@ framework:
         app: cache.adapter.array
         pools:
             iss_location_pool:
-                default_lifetime: 10
+                default_lifetime: '%iss_location_cache_ttl%'
 
         # Unique name of your app: used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
@@ -22,3 +22,8 @@ framework:
         # Namespaced pools use the above "app" backend by default
         #pools:
             #my.dedicated.cache: null
+
+when@prod:
+    framework:
+        cache:
+            app: cache.adapter.filesystem

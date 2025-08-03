@@ -104,3 +104,13 @@ bin/console cache:pool:clear cache.app
 
 
 
+## Production
+
+> Compile and generate a map of assets
+
+php bin/console asset-map:compile
+
+> Clear cache
+
+php bin/console cache:clear --env=prod
+
