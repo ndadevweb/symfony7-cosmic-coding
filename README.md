@@ -118,6 +118,10 @@ php bin/console dbal:run-sql "SELECT 1"
 
 symfony console doctrine:database:create
 
+> Validate Schema
+
+symfony console doctrine:schema:validate
+
 
 
 ## Production
