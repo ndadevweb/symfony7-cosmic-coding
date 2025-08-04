@@ -23,3 +23,21 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./backend:/app:ro
     restart: unless-stopped
+
+  sfcast_cosmic_coding_postgres:
+    container_name: sfcast_cosmic_coding_postgres
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: cosmiccoding_db
+      POSTGRES_PASSWORD: cosmiccoding_p
+      POSTGRES_USER: cosmiccoding_u
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "cosmiccoding_db", "-U", "cosmiccoding_u"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    volumes:
+      - sfcast_cosmic_coding_database_data:/var/lib/postgresql/data:rw
+
+volumes:
+  sfcast_cosmic_coding_database_data:

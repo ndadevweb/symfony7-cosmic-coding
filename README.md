@@ -104,6 +104,22 @@ bin/console cache:pool:clear cache.app
 
 
 
+# Database
+
+> To see if the database environment variable is detected
+
+symfony var:export --multiline
+
+> To test database connection
+
+php bin/console dbal:run-sql "SELECT 1"
+
+> To create a database
+
+symfony console doctrine:database:create
+
+
+
 ## Production
 
 > Compile and generate a map of assets
