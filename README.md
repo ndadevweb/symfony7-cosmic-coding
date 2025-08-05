@@ -147,6 +147,13 @@ composer require --dev foundry
 symfony console make:factory
 
 
+
+# Pagination
+
+composer require babdev/pagerfanta-bundle pagerfanta/doctrine-orm-adapter
+
+
+
 ## Production
 
 > Compile and generate a map of assets
