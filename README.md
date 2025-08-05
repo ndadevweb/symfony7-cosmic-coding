@@ -138,6 +138,14 @@ symfony console doctrine:fixtures:load
 symfony console doctrine:query:sql 'SELECT * FROM starship'
 
 
+# Foundry
+
+composer require --dev foundry
+
+> Create a factory to generate random data (and select the entity / entities)
+
+symfony console make:factory
+
 
 ## Production
 
