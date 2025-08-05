@@ -154,6 +154,23 @@ composer require babdev/pagerfanta-bundle pagerfanta/doctrine-orm-adapter
 
 
 
+# Doctrine
+
+> extensions doctrine
+
+composer require stof/doctrine-extensions-bundle
+
+Exemple above the property:
+
+use Gedmo\Mapping\Annotation\Slug;
+use Gedmo\Mapping\Annotation\Timestampable;
+
+#[Slug(fields: ['name'])]
+...
+#[Timestampable(on: 'create')] or #[Timestampable(on: 'update')]
+...
+
+
 ## Production
 
 > Compile and generate a map of assets
