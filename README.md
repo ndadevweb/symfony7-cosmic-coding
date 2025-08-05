@@ -124,6 +124,21 @@ symfony console doctrine:schema:validate
 
 
 
+
+# Fixtures
+
+composer require --dev orm-fixtures
+
+> Load fixtures
+
+symfony console doctrine:fixtures:load
+
+> Check if data inserted
+
+symfony console doctrine:query:sql 'SELECT * FROM starship'
+
+
+
 ## Production
 
 > Compile and generate a map of assets
