@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\StarshipStatusEnum;
 use App\Repository\StarshipRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -12,10 +13,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:ship:remove',
-    description: 'Delete a starship',
+    name: 'app:ship:check-in',
+    description: 'Check-in a ship',
 )]
-class ShipRemoveCommand extends Command
+class ShipCheckInCommand extends Command
 {
     public function __construct(
         private StarshipRepository $shipRepository,
@@ -43,12 +44,14 @@ class ShipRemoveCommand extends Command
             return Command::FAILURE;
         }
 
-        $io->comment(sprintf('Removing starship: %s', $ship->getName()));
+        $io->comment(sprintf('Checking-in starship: %s', $ship->getName()));
 
-        $this->em->remove($ship);
+        $ship->setArrivedAt(new \DateTimeImmutable('now'));
+        $ship->setStatus(StarshipStatusEnum::WAITING);
+
         $this->em->flush();
 
-        $io->success('Starship removed.');
+        $io->success('Starship checked-in.');
 
         return Command::SUCCESS;
     }

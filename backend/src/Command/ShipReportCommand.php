@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:ship-report',
+    name: 'app:ship:report',
     description: 'Add a short description for your command',
 )]
 class ShipReportCommand extends Command
