@@ -3,13 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\StarshipRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: StarshipRepository::class)]
 class Starship
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,13 +39,16 @@ class Starship
     #[Slug(fields: ['name'])]
     private ?string $slug = null;
 
-    #[ORM\Column]
-    #[Timestampable(on: 'create')]
-    private ?\DateTimeImmutable $updatedAt = null;
+    /**
+     * @var Collection<int, StarshipPart>
+     */
+    #[ORM\OneToMany(targetEntity: StarshipPart::class, mappedBy: 'starship')]
+    private Collection $parts;
 
-    #[ORM\Column]
-    #[Timestampable(on: 'update')]
-    private ?\DateTimeImmutable $createdAt = null;
+    public function __construct()
+    {
+        $this->parts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -133,34 +141,40 @@ class Starship
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function checkIn(?\DateTimeImmutable $arrivedAt = null): static
     {
         $this->arrivedAt = $arrivedAt ?? new \DateTimeImmutable('now');
         $this->status = StarshipStatusEnum::WAITING;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, StarshipPart>
+     */
+    public function getParts(): Collection
+    {
+        return $this->parts;
+    }
+
+    public function addPart(StarshipPart $part): static
+    {
+        if (!$this->parts->contains($part)) {
+            $this->parts->add($part);
+            $part->setStarship($this);
+        }
+
+        return $this;
+    }
+
+    public function removePart(StarshipPart $part): static
+    {
+        if ($this->parts->removeElement($part)) {
+            // set the owning side to null (unless already changed)
+            if ($part->getStarship() === $this) {
+                $part->setStarship(null);
+            }
+        }
 
         return $this;
     }
