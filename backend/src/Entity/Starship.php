@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\StarshipPartRepository;
 use App\Repository\StarshipRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -177,5 +178,13 @@ class Starship
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, StarshipPart>
+     */
+    public function getExpensiveParts(): Collection
+    {
+        return $this->parts->matching(StarshipPartRepository::createExpensiveCriteria());
     }
 }
