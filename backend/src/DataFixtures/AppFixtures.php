@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\StarshipStatusEnum;
+use App\Factory\DroidFactory;
 use App\Factory\StarshipFactory;
 use App\Factory\StarshipPartFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -38,5 +39,6 @@ class AppFixtures extends Fixture
 
         StarshipFactory::createMany(20);
         StarshipPartFactory::createMany(100);
+        DroidFactory::createMany(100);
     }
 }
