@@ -2,8 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Starship;
-use App\Entity\StarshipPart;
 use App\Entity\StarshipStatusEnum;
 use App\Factory\StarshipFactory;
 use App\Factory\StarshipPartFactory;

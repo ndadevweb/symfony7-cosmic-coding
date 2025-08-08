@@ -24,6 +24,7 @@ final class StarshipPartFactory extends PersistentProxyObjectFactory
         'Self-Destruct Button Cover' => 'for when you have a cat',
         'Redshirt Dispenser' => 'Instantly replenishes expendable crew members.',
     ];
+
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
