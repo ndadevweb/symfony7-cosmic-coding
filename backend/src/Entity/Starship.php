@@ -221,6 +221,6 @@ class Starship
 
     public function getDroidNames(): string
     {
-        return implode(', ', $this->droids->map(fn(Droid $droid) => $droid->getName())->toArray());
+        return implode(', ', $this->droids->map(fn (Droid $droid) => $droid->getName())->toArray());
     }
 }
