@@ -12,13 +12,13 @@ class MainController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
     public function homepage(
-        StarshipRepository $repository,
+        StarshipRepository $starshipRepository,
         Request $request,
     ): Response {
-        $ships = $repository->findIncomplete();
+        $ships = $starshipRepository->findIncompleteOrderedByDroidCount();
         $ships->setMaxPerPage(5);
         $ships->setCurrentPage($request->query->get('page', 1));
-        $myShip = $repository->findMyShip();
+        $myShip = $starshipRepository->findMyShip();
 
         return $this->render('main/homepage.html.twig', [
             'myShip' => $myShip,
