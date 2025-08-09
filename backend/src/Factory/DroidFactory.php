@@ -33,7 +33,7 @@ final class DroidFactory extends PersistentProxyObjectFactory
     {
         return [
             'name' => self::faker()->randomElement([
-                'R2-D2', 'C-3PO', 'BB-8', 'ZZZ-123',
+                'R2-D2', 'C-3PO', 'IG-11', 'ZZZ-123',
             ]),
             'primaryFunction' => self::faker()->randomElement([
                 'astromech',
