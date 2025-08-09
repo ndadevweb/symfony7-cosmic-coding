@@ -122,7 +122,9 @@ symfony console doctrine:database:create
 
 symfony console doctrine:schema:validate
 
+> Show Schema before change (after add or remove properties from entity/entities)
 
+symfony console doctrine:scema:update --dump-sql
 
 
 # Fixtures
