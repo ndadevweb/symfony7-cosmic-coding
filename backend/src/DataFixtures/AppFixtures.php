@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\StarshipDroid;
 use App\Entity\StarshipStatusEnum;
 use App\Factory\DroidFactory;
 use App\Factory\StarshipFactory;
