@@ -49,13 +49,12 @@ class Starship
     /**
      * @var Collection<int, StarshipDroid>
      */
-    #[ORM\OneToMany(targetEntity: StarshipDroid::class, mappedBy: 'starship')]
+    #[ORM\OneToMany(targetEntity: StarshipDroid::class, mappedBy: 'starship', cascade: ['persist'])]
     private Collection $starshipDroids;
 
     public function __construct()
     {
         $this->parts = new ArrayCollection();
-        $this->droids = new ArrayCollection();
         $this->starshipDroids = new ArrayCollection();
     }
 
@@ -204,10 +203,18 @@ class Starship
         return $this->starshipDroids->map(fn (StarshipDroid $starshipDroid) => $starshipDroid->getDroid());
     }
 
-    public function addDroid(Droid $droid): static
+    public function addDroid(Droid $droid, \DateTimeImmutable $assignedAt = null): static
     {
-        if (!$this->droids->contains($droid)) {
-            $this->droids->add($droid);
+        if (!$this->getDroids()->contains($droid)) {
+            $starshipDroid = new StarshipDroid();
+            $starshipDroid->setDroid($droid);
+            $starshipDroid->setStarship($this);
+
+            if($assignedAt) {
+                $starshipDroid->setAssignedAt($assignedAt);
+            }
+
+            $this->starshipDroids->add($starshipDroid);
         }
 
         return $this;
