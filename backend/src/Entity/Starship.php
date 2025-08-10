@@ -201,7 +201,7 @@ class Starship
      */
     public function getDroids(): Collection
     {
-        return $this->droids;
+        return $this->starshipDroids->map(fn (StarshipDroid $starshipDroid) => $starshipDroid->getDroid());
     }
 
     public function addDroid(Droid $droid): static
@@ -222,7 +222,7 @@ class Starship
 
     public function getDroidNames(): string
     {
-        return implode(', ', $this->droids->map(fn (Droid $droid) => $droid->getName())->toArray());
+        return implode(', ', $this->getDroids()->map(fn (Droid $droid) => $droid->getName())->toArray());
     }
 
     /**

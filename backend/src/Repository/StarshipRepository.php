@@ -26,8 +26,8 @@ class StarshipRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('s')
             ->where('s.status != :status')
-            ->orderBy('COUNT(droid)', 'ASC')
-            ->leftJoin('s.droids', 'droid')
+            ->orderBy('COUNT(starshipDroid)', 'ASC')
+            ->leftJoin('s.starshipDroids', 'starshipDroid')
             ->groupBy('s.id')
             ->setParameter('status', StarshipStatusEnum::COMPLETED)
             ->getQuery();

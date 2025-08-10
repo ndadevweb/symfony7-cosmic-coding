@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\StarshipDroid;
 use App\Entity\StarshipStatusEnum;
 use App\Factory\DroidFactory;
 use App\Factory\StarshipFactory;
@@ -47,8 +48,16 @@ class AppFixtures extends Fixture
         DroidFactory::createMany(100);
 
         StarshipFactory::createMany(100, fn () => [
-            'droids' => DroidFactory::randomRange(1, 5),
+            // 'droids' => DroidFactory::randomRange(1, 5),
         ]);
         StarshipPartFactory::createMany(100);
+
+        $ship = StarshipFactory::random()->_real();
+        $droid = DroidFactory::random()->_real();
+        $starshipDroid = new StarshipDroid();
+        $starshipDroid->setDroid($droid);
+        $starshipDroid->setStarship($ship);
+        $manager->persist($starshipDroid);
+        $manager->flush();
     }
 }
